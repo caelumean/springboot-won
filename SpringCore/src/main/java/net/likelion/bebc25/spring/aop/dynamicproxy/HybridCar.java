@@ -1,4 +1,4 @@
-package net.likelion.bebc25.spring;
+package net.likelion.bebc25.spring.aop.dynamicproxy;
 
 public class HybridCar implements Car {
     @Override

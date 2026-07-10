@@ -1,10 +1,11 @@
-package net.likelion.bebc25.oop.after;
+package net.likelion.bebc25.spring.di.setter;
 
 public class Driver {
     private Car car;
 
-    // DI
-    Driver(Car car){
+    // setter injection
+    public void setCar(Car car) {
+        System.out.println("Setting Injection 호출");
         this.car = car;
     }
 

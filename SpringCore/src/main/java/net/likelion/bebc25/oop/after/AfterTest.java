@@ -5,6 +5,6 @@ public class AfterTest {
 //        Car car = new GasolineCar();
         Car car = new HybridCar();
         Driver driver = new Driver(car);
-        driver.dreveCar();
+        driver.driveCar();
     }
 }

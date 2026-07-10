@@ -1,14 +1,15 @@
-package net.likelion.bebc25.spring;
+package net.likelion.bebc25.spring.di.constructor;
 
 public class Driver {
-    private Car car;
+    private final Car car;
 
     // DI
     Driver(Car car){
+        System.out.println("Constructor Injection 호출");
         this.car = car;
     }
 
-    public void dreveCar(){
+    public void driveCar(){
         car.startEngine();
         car.drive();
         car.stopEngine();

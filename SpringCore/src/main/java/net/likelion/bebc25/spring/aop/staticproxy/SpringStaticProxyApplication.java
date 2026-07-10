@@ -1,9 +1,9 @@
-package net.likelion.bebc25.spring;
+package net.likelion.bebc25.spring.aop.staticproxy;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class SpringCoreApplication {
+public class SpringStaticProxyApplication {
     void main(){
         // 1. 스프링 컨테이너 생성(Bean 정보 분석을 위한 Config 객체 지정)
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
@@ -12,7 +12,7 @@ public class SpringCoreApplication {
         Driver driver = context.getBean(Driver.class);
 
         // 3. 비즈니스 로직 실행
-        driver.dreveCar();
+        driver.driveCar();
 
     }
 
