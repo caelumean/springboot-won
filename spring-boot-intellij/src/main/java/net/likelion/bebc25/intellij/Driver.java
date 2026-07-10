@@ -1,5 +1,8 @@
-package net.likelion.bebc25.spring.aop.springaop;
+package net.likelion.bebc25.intellij;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Driver {
     private final Car car;
 

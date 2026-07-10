@@ -12,12 +12,10 @@ public class SpringAopApplication {
         Driver driver = context.getBean(Driver.class);
 
         // toString 쓰나 안쓰나 잘 나옴
-//        System.out.println("Driver 객체: " + driver);
-        System.out.println("Driver 객체: " + driver.toString());
+        System.out.println("Driver 객체: " + driver);
+//        System.out.println("Driver 객체: " + driver.toString());
 
         // 3. 비즈니스 로직 실행
         driver.driveCar(100);
-
     }
-
 }

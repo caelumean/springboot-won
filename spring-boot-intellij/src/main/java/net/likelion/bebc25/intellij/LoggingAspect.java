@@ -1,4 +1,4 @@
-package net.likelion.bebc25.spring.aop.springaop;
+package net.likelion.bebc25.intellij;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -9,9 +9,7 @@ import java.util.Arrays;
 @Aspect // 횡단 관심사 클래스 정의
 public class LoggingAspect {
 
-    @Pointcut("execution(* net.likelion.bebc25.spring.aop.springaop.*Driver.*(..))")
-    // 이거 하나로 maxSpeed가 출력이 되느냐 안되느냐 달라진다.
-//    @Pointcut("execution(* net.likelion.bebc25.spring.aop.springaop.*Car.*(..))")
+    @Pointcut("execution(* net.likelion.bebc25.intellij.*Driver.*(..))")
     private void driverClass(){ }
 
     // 메서드 수행 전에 로그 메세지 출력
