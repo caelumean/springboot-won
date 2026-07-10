@@ -1,5 +1,8 @@
 package net.likelion.bebc25.intellij;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class GasolineCar implements Car {
     @Override
     public void startEngine(){

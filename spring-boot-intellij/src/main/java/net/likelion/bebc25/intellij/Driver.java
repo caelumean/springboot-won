@@ -4,9 +4,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Driver {
-    private final Car car;
+    private  Car car;
 
-    // DI
     Driver(Car car){
         System.out.println("Constructor Injection 호출" + car);
         this.car = car;
