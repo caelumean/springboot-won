@@ -74,6 +74,7 @@ public class BoardController {
         return result;
     }
 
+    // 게시글 목록 조회하는 컨트롤러
     @GetMapping("/01/board/list.html")
     @ResponseBody
     public String getBoardList() {
@@ -130,7 +131,6 @@ public class BoardController {
                     );
 
         }
-
          result += """
                       </tbody>
                     </table>
@@ -141,5 +141,122 @@ public class BoardController {
                 """;
 
         return result;
+    }
+
+    // 게시글 상세 조회
+    @GetMapping("/01/board/detail.html")
+    @ResponseBody
+    public String getDetail(){
+        // 게시글 상세 조회(데이터)
+        PostDto post1 = fakePosts.get(0);
+        String result = """
+                <!DOCTYPE html>
+                <html lang="ko">
+                <head>
+                  <meta charset="UTF-8">
+                  <title>스프링 게시판 - 상세 보기</title>
+                  <link rel="stylesheet" href="/board/css/common.css">
+                  <link rel="stylesheet" href="/board/css/detail.css">
+                </head>
+                <body>
+                  <div class="container">
+                    <h1>게시글 상세 정보</h1>
+                    <div class="nav">
+                      <a href="list.html">목록으로</a>
+                      <a href="write.html">새 글 쓰기</a>
+                    </div>
+                
+                    <table style="margin-bottom: 20px;">
+                      <tr>
+                        <th style="width: 20%%;">번호</th>
+                        <td>%s</td>
+                      </tr>
+                      <tr>
+                        <th>제목</th>
+                        <td>%s</td>
+                      </tr>
+                      <tr>
+                        <th>작성자</th>
+                        <td>%s</td>
+                      </tr>
+                      <tr>
+                        <th>작성일시</th>
+                        <td>%s</td>
+                      </tr>
+                      <tr>
+                        <th>내용</th>
+                        <td style="white-space: pre-wrap;">%s</td>
+                      </tr>                   
+                    </table>               
+                    <div>
+                      <a href="edit.html" class="btn">수정하기</a>
+                      <a href="list.html" class="btn btn-secondary">목록으로</a>
+                    </div>
+                  </div>
+                </body>
+                </html>
+                
+                """;
+        result = result.formatted(
+                post1.getId(),
+                post1.getTitle(),
+                post1.getAuthor(),
+                post1.getCreatedAt(),
+                post1.getContent()
+        );
+
+        return result;
+
+    }
+
+    // 게시글 등록 화면 요청하는 컨트롤러
+    @GetMapping("/01/board/write.html")
+    @ResponseBody
+    public String getWriteForm(){
+        String result = """
+                <!DOCTYPE html>
+                <html lang="ko">
+                <head>
+                  <meta charset="UTF-8">
+                  <title>스프링 게시판 - 새 글 쓰기</title>
+                  <link rel="stylesheet" href="/board/css/common.css">
+                  <link rel="stylesheet" href="/board/css/write.css">
+                </head>
+                <body>
+                  <div class="container">
+                    <h1>게시글 등록</h1>
+                    <div class="nav">
+                      <a href="list.html">목록으로</a>
+                      <a href="write.html">새 글 쓰기</a>
+                    </div>
+                
+                    <form action="list.html">
+                      <div class="form-group">
+                        <label for="title">제목</label>
+                        <input type="text" id="title" name="title" placeholder="제목을 입력하세요" required>
+                      </div>
+                
+                      <div class="form-group">
+                        <label for="author">작성자</label>
+                        <input type="text" id="author" name="author" placeholder="작성자 이름을 입력하세요" required>
+                      </div>
+                
+                      <div class="form-group">
+                        <label for="content">내용</label>
+                        <textarea id="content" name="content" rows="10" placeholder="내용을 입력하세요" required></textarea>
+                      </div>
+                
+                      <div style="margin-top: 20px;">
+                        <button type="submit" class="btn">등록</button>
+                        <a href="list.html" class="btn btn-secondary">취소</a>
+                      </div>
+                    </form>
+                  </div>
+                </body>
+                </html>
+                
+                """;
+        return result;
+
     }
 }
