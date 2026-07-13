@@ -129,7 +129,6 @@ public class BoardController {
                                 post.getCreatedAt()
 
                     );
-
         }
          result += """
                       </tbody>
@@ -189,6 +188,7 @@ public class BoardController {
                       </tr>                   
                     </table>               
                     <div>
+<!--                      <a href="/board/edit.html" class="btn">수정하기</a>  -->
                       <a href="edit.html" class="btn">수정하기</a>
                       <a href="list.html" class="btn btn-secondary">목록으로</a>
                     </div>
@@ -206,9 +206,7 @@ public class BoardController {
         );
 
         return result;
-
     }
-
     // 게시글 등록 화면 요청하는 컨트롤러
     @GetMapping("/01/board/write.html")
     @ResponseBody
