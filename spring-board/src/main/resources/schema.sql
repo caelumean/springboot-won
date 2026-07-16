@@ -1,0 +1,11 @@
+-- 게시글 테이블 생성
+CREATE TABLE IF NOT EXISTS post2 (
+                      id INT AUTO_INCREMENT PRIMARY KEY,
+                      author VARCHAR(10) NOT NULL ,
+                      title VARCHAR(200) NOT NULL,
+                      content TEXT NOT NULL,
+                      secret BOOLEAN NOT NULL DEFAULT FALSE,
+                      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+drop table post2;
