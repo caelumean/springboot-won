@@ -1,0 +1,179 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"맑은 고딕", sans-serif;
+}
+
+body{
+    background:#f7f7f7;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.logo{
+    color:#03c75a;
+    font-size:64px;
+    font-weight:bold;
+    margin-top:40px;
+    margin-bottom:40px;
+}
+
+.login-box{
+
+    width:520px;
+    background:white;
+
+    border:1px solid #ddd;
+    border-radius:20px;
+
+    padding:50px;
+
+}
+
+.login-box input[type=text],
+.login-box input[type=password]{
+
+    width:100%;
+    border:none;
+    border-bottom:1px solid #ddd;
+
+    padding:15px 5px;
+
+    font-size:17px;
+
+    margin-bottom:40px;
+
+    outline:none;
+
+}
+
+.option-area{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    font-size:14px;
+
+    margin-bottom:25px;
+
+}
+
+.button-area{
+
+    display:flex;
+    gap:10px;
+
+}
+
+.passkey{
+
+    width:50%;
+    height:55px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#f4f4f4;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+}
+
+.login{
+
+    width:50%;
+    height:55px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#03c75a;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.login:hover{
+
+    background:#02b350;
+
+}
+
+.passkey:hover{
+
+    background:#ebebeb;
+
+}
+
+.sub-login{
+
+    margin-top:35px;
+
+    text-align:center;
+
+    font-size:14px;
+
+}
+
+.sub-login a{
+
+    text-decoration:none;
+
+    color:#444;
+
+}
+
+.sub-login span{
+
+    margin:0 12px;
+
+    color:#bbb;
+
+}
+
+.footer{
+
+    margin-top:30px;
+
+    font-size:14px;
+
+}
+
+.footer a{
+
+    text-decoration:none;
+
+    color:#666;
+
+}
+
+.footer span{
+
+    margin:0 10px;
+
+    color:#bbb;
+
+}
+
+.join{
+
+    color:#03c75a !important;
+
+}
