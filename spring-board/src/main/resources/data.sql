@@ -1,3 +1,4 @@
-INSERT INTO post2 (secret, title, content, created_at, author) VALUES
-    (TRUE, '첫번째 게시글', '오늘도 자바 공부를 열심히 하고 있습니다.', CURRENT_TIMESTAMP, '하루'),
-    (FALSE, '두번째 게시글', '오늘도 스프링 공부를 열심히 하고 있습니다.', CURRENT_TIMESTAMP, '나무');
+INSERT INTO post2 (title, content, author, secret, created_at) VALUES ('1번 게시글', '1번 게시글 내용입니다.', '하루', true, CURRENT_TIMESTAMP);
+INSERT INTO post2 (title, content, author, secret, created_at) VALUES ('2번 게시글', '2번 게시글 내용입니다.', '나무', false, CURRENT_TIMESTAMP);
+INSERT INTO member2 (username, password, email, created_at) VALUES ('haru', 'pass1', 'user1@example.com', CURRENT_TIMESTAMP);
+INSERT INTO member2 (username, password, email, created_at) VALUES ('namu', 'pass2', 'user2@example.com', CURRENT_TIMESTAMP);

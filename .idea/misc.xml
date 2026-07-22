@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="KubernetesApiProvider"><![CDATA[{}]]></component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true" project-jdk-name="25" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/spring-board" />
+    <file type="web" url="file://$PROJECT_DIR$/spring-boot-initializr" />
+    <file type="web" url="file://$PROJECT_DIR$/spring-boot-intellij" />
+    <file type="web" url="file://$PROJECT_DIR$/SpringCore" />
   </component>
+  <component name="KubernetesApiProvider"><![CDATA[{}]]></component>
 </project>

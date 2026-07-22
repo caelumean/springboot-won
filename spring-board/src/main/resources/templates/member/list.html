@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 목록</title>
+  <link rel="stylesheet" href="/board/css/common.css">
+  <link rel="stylesheet" href="/board/css/list.css">
+</head>
+<body>
+  <div class="container">
+    <h1>회원 목록</h1>
+    <div class="nav">
+      <a href="register.html" class="btn">회원가입</a>
+      <a href="login.html" class="btn btn-secondary">로그인</a>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>아이디</th>
+          <th>이메일</th>
+          <th>가입일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 수강생 실습: 동적 데이터 바인딩 영역 -->
+        <tr>
+          <td>1</td>
+          <td><a href="edit.html?id=1">haru</a></td>
+          <td>user1@example.com</td>
+          <td>2026-07-16 12:00:00</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><a href="edit.html?id=2">namu</a></td>
+          <td>user2@example.com</td>
+          <td>2026-07-16 12:00:00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

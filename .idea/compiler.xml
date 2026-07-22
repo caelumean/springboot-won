@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="spring-board" options="-parameters -Xlint:-processing" />
+      <module name="spring-board.main" options="-parameters -Xlint:-processing" />
+      <module name="spring-board.test" options="-parameters -Xlint:-processing" />
+      <module name="spring-boot-initializr" options="-parameters" />
+      <module name="spring-boot-initializr.main" options="-parameters" />
+      <module name="spring-boot-initializr.test" options="-parameters" />
+      <module name="spring-boot-intellij" options="-parameters" />
+      <module name="spring-boot-intellij.main" options="-parameters" />
+      <module name="spring-boot-intellij.test" options="-parameters" />
+    </option>
+  </component>
+</project>
