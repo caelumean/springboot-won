@@ -25,35 +25,48 @@ public class MemberServiceImpl implements MemberService {
   }
 
   /**
-   * {@inheritDoc}
+   * 회원 가입
    */
   @Override
   public void register(MemberDto member) {
     // 실습 영역
+    memberRepository.save(member);
   }
 
   /**
-   * {@inheritDoc}
+   * 로그인
    */
   @Override
   public MemberDto login(String username, String password) {
+    MemberDto member= memberRepository.findByUsername(username);
+    if(member==null){
+      return null;
+    }
+
+    if(member.getPassword().equals(password)){
+      return member;
+    }
+
     return null;
+
   }
 
   /**
-   * {@inheritDoc}
+   * 회원 정보를 수정
    */
   @Override
   public void modifyInfo(MemberDto member) {
     // 실습 영역
+    memberRepository.update(member);
   }
 
   /**
-   * {@inheritDoc}
+   * 회원 탈퇴
    */
   @Override
   public void withdraw(int id) {
     // 실습 영역
+    memberRepository.deleteById(id);
   }
 
   /**
@@ -70,5 +83,17 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public MemberDto getMember(int id) {
     return memberRepository.findById(id);
+  }
+
+  /**
+   * UserName 중복 검사
+   * @param username
+   * @return
+   */
+  @Override
+  public boolean existsByUsername(String username) {
+    MemberDto member= memberRepository.findByUsername(username);
+
+    return member != null;
   }
 }

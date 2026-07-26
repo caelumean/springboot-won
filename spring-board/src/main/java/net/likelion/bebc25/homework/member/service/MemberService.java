@@ -52,4 +52,6 @@ public interface MemberService {
    * @return 조회된 회원 DTO
    */
   MemberDto getMember(int id);
+
+  boolean existsByUsername(String username);
 }

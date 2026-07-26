@@ -1,11 +1,16 @@
 package net.likelion.bebc25.homework.member.controller;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import net.likelion.bebc25.homework.member.dto.MemberDto;
 import net.likelion.bebc25.homework.member.service.MemberService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 회원 관련 요청(회원 가입, 로그인, 정보 수정, 탈퇴 등)을 처리하여 해당 화면 또는 동작으로 분기하는 컨트롤러 클래스입니다.
@@ -35,6 +40,8 @@ public class MemberController {
   @GetMapping("/list.html")
   public String getMemberList(Model model) {
     // 실습 영역
+    List<MemberDto> members = memberService.getMembers();
+    model.addAttribute("members", members);
     return "member/list";
   }
 
@@ -56,9 +63,19 @@ public class MemberController {
    * @return 로그인 화면으로의 redirect 경로
    */
   @PostMapping("/register")
-  public String register(@ModelAttribute MemberDto memberDto) {
+  public String register(@ModelAttribute("memberForm") MemberDto memberDto,
+                         BindingResult bindingResult) {
     // 실습 영역
+    // Username이 있다면
+    if(memberService.existsByUsername(memberDto.getUsername())) {
+      bindingResult.rejectValue("username", "duplicate","이미 사용중인 아이디 입니다.");
+    }
+    if(bindingResult.hasErrors()){
+      return "member/register";
+    }
+    memberService.register(memberDto);
     return "redirect:/member/login.html";
+
   }
 
   /**
@@ -80,8 +97,15 @@ public class MemberController {
    * @return 회원 목록 화면으로의 redirect 경로
    */
   @PostMapping("/login")
-  public String login(@RequestParam String username, @RequestParam String password) {
+  public String login(@RequestParam String username, @RequestParam String password, Model model) {
     // 실습 영역
+    MemberDto member = memberService.login(username, password);
+
+    if(member == null) {
+      model.addAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");
+      return "member/login";
+    }
+
     return "redirect:/member/list.html";
   }
 
@@ -95,6 +119,8 @@ public class MemberController {
   @GetMapping("/edit.html")
   public String getEditForm(@RequestParam int id, Model model) {
     // 실습 영역
+    MemberDto memberDto = memberService.getMember(id);
+    model.addAttribute("memberForm", memberDto);
     return "member/edit";
   }
 
@@ -105,9 +131,15 @@ public class MemberController {
    * @return 회원 목록 화면으로의 redirect 경로
    */
   @PostMapping("/edit")
-  public String edit(@ModelAttribute MemberDto memberDto) {
+  public String edit(@Valid @ModelAttribute("memberForm") MemberDto memberDto,
+                     BindingResult bindingResult) {
     // 실습 영역
-    return "redirect:/member/list.html";
+    if(bindingResult.hasErrors()){
+      return "member/edit";
+    }
+    memberService.modifyInfo(memberDto);
+
+    return "redirect:/member/list.html?id=" + memberDto.getId();
   }
 
   /**
@@ -119,6 +151,7 @@ public class MemberController {
   @PostMapping("/withdraw")
   public String withdraw(@RequestParam int id) {
     // 실습 영역
+    memberService.withdraw(id);
     return "redirect:/member/list.html";
   }
 }

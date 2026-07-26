@@ -5,6 +5,7 @@
   <title>스프링 게시판 - 상세 보기</title>
   <link rel="stylesheet" href="/board/css/common.css">
   <link rel="stylesheet" href="/board/css/detail.css">
+  <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
 </head>
 <body>
   <div class="container" >
@@ -34,8 +35,12 @@
       </tr>
       <tr>
         <th>내용</th>
-        <td th:text="${post.content}" style="white-space: pre-wrap;">이것은 정적으로 추가된 세 번째 게시글의 상세 예시 본문입니다.
-스프링 MVC와 아키텍처 학습을 위해 모의 데이터를 채워두었습니다.</td>
+<!--        <td th:text="${post.content}" style="white-space: pre-wrap;">이것은 정적으로 추가된 세 번째 게시글의 상세 예시 본문입니다.-->
+<!--스프링 MVC와 아키텍처 학습을 위해 모의 데이터를 채워두었습니다.</td>-->
+        <td>
+          <div id="viewer"></div>
+          <textarea id="content" th:text="${post.content}" hidden></textarea>
+        </td>
       </tr>
     </table>
 
@@ -44,5 +49,14 @@
       <a href="list.html" class="btn btn-secondary">목록으로</a>
     </div>
   </div>
+
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+  <script>
+    const viewer = new toastui.Editor.factory({
+      el: document.querySelector('#viewer'),
+      viewer: true,
+      initialValue: document.querySelector('#content').value
+    });
+  </script>
 </body>
 </html>

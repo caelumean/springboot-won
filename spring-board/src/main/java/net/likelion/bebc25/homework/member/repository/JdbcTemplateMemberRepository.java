@@ -1,6 +1,7 @@
 package net.likelion.bebc25.homework.member.repository;
 
 import net.likelion.bebc25.homework.member.dto.MemberDto;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -45,6 +46,11 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
   @Override
   public void save(MemberDto member) {
     // 실습 영역
+    jdbcTemplate.update("INSERT INTO member2 (username, password, email, created_at) VALUES (?, ?, ?, ?)"
+            , member.getUsername()
+            , member.getPassword()
+            , member.getEmail()
+            , member.getCreatedAt());
   }
 
   /**
@@ -52,7 +58,12 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
    */
   @Override
   public MemberDto findByUsername(String username) {
-    return null;
+    try{
+      return jdbcTemplate.queryForObject("SELECT * FROM member2 WHERE username = ?", memberRowMapper, username);
+    } catch(EmptyResultDataAccessException e){
+      return null;
+    }
+
   }
 
   /**
@@ -60,7 +71,11 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
    */
   @Override
   public MemberDto findById(int id) {
-    return null;
+    try {
+      return jdbcTemplate.queryForObject("SELECT * FROM member2 WHERE id = ?", memberRowMapper, id);
+    } catch (EmptyResultDataAccessException e){
+      return null;
+    }
   }
 
   /**
@@ -69,6 +84,13 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
   @Override
   public void update(MemberDto member) {
     // 실습 영역
+    jdbcTemplate.update("UPDATE member2 SET username = ?, password = ?, email = ?, created_at = ? WHERE id = ?"
+    , member.getUsername()
+    , member.getPassword()
+    , member.getEmail()
+    , member.getCreatedAt()
+    , member.getId()
+    );
   }
 
   /**
@@ -77,6 +99,7 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
   @Override
   public void deleteById(int id) {
     // 실습 영역
+    jdbcTemplate.update("DELETE FROM member2 WHERE id = ?", id);
   }
 
   /**
@@ -84,6 +107,6 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
    */
   @Override
   public List<MemberDto> findAll() {
-    return null;
+    return jdbcTemplate.query("SELECT * FROM member2", memberRowMapper);
   }
 }

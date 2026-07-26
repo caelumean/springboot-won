@@ -33,6 +33,7 @@
         <a href="list.html" class="btn btn-secondary">목록으로</a>
       </div>
     </form>
+    <div class="field-error" th:if="${loginError}" th:text="${loginError}"></div>
   </div>
 </body>
 </html>

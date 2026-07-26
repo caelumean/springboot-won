@@ -24,17 +24,11 @@
       </thead>
       <tbody>
         <!-- 수강생 실습: 동적 데이터 바인딩 영역 -->
-        <tr>
-          <td>1</td>
-          <td><a href="edit.html?id=1">haru</a></td>
-          <td>user1@example.com</td>
-          <td>2026-07-16 12:00:00</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td><a href="edit.html?id=2">namu</a></td>
-          <td>user2@example.com</td>
-          <td>2026-07-16 12:00:00</td>
+        <tr th:each="member : ${members}">
+          <td th:text="${member.id}" >1</td>
+          <td><a th:href="@{edit.html(id=${member.id})}" th:text="${member.username}"></a></td>
+          <td th:text="${member.email}"></td>
+          <td th:text="${#temporals.format(member.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
       </tbody>
     </table>
