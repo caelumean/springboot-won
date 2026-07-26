@@ -64,14 +64,20 @@
     <script>
 <!--       에디터 생성-->
       const editor = new toastui.Editor({
+        // 에디터가 표시될 위치
         el: document.querySelector('#editor'),
         height: '500px',
-        initialEditType: 'markdown',
-        initialValue: '',
-        previewStyle: 'vertical',
+        initialEditType: 'wysiwyg',  // wysiwyg/markdown 타입도 있음 html로 저장시키기위해 wysiwyg 방식으로 사용
+        // initialValue: document.querySelector("#content").value,
+        // markdown모드에서만 쓸모 있는 기능
+        // previewStyle: 'vertical',
+        hideModeSwitch : true,  // wysiwyg/markdown 전환 버튼 숨기기
 
+        // Toast UI 함수
+        // hooks: 특정 이벤트가 발생하면 실행되는 함수
         hooks: {
-          async addImageBlobHook(blob, callback) { // 이미지 업로드 로직 커스텀
+          // 이미지 업로드 및 드래그앱 드롭하면 이 함수가 자동으로 호출
+          async addImageBlobHook(blob, callback) {
             try {
               /*
                * 1. 에디터에 업로드한 이미지를 FormData 객체에 저장
@@ -81,6 +87,7 @@
               formData.append('image', blob);
 
               // 2. FileApiController - uploadEditorImage 메서드 호출
+              // ('/homework/board/image-upload')로 업로드
               const response = await fetch('/homework/board/image-upload', {
                 method: 'POST',
                 body: formData,
@@ -92,6 +99,7 @@
 
               // 4. addImageBlobHook의 callback 함수를 통해, 디스크에 저장된 이미지를 에디터에 렌더링
               const imageUrl = `/homework/board/image-print?filename=${filename}`;
+              // 5. Toast UI에게 이 이미지를 본문에 삽입하라는 함수
               callback(imageUrl, 'image alt attribute');
 
             } catch (error) {
@@ -100,17 +108,18 @@
           }
         }
       });
+      // 수정 화면이면 기존 내용 표시
+      const content = document.querySelector("#content").value;
+      if(content) {
+        editor.setHTML(content);
+      }
+      // form 태그를 찾음
       const form = document.querySelector('form');
+      // form 태그에 submit이벤트 등록 또는 수정버튼
       form.addEventListener('submit', function (){
-        document.querySelector("#content").value = editor.getMarkdown();
+        // HTML에 저장
+        document.querySelector("#content").value = editor.getHTML();
       })
-      // const editor = new toastui.Editor({
-      //   el: document.querySelector('#editor'), // 에디터를 적용할 요소 (컨테이너)
-      //   height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
-      //   initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
-      //   initialValue: '',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
-      //   previewStyle: 'vertical'                // 마크다운 프리뷰 스타일 (tab || vertical)
-      // });
     </script>
 </body>
 </html>
