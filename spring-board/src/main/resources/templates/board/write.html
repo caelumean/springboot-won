@@ -88,7 +88,7 @@
 
               // 2. FileApiController - uploadEditorImage 메서드 호출
               // ('/homework/board/image-upload')로 업로드
-              const response = await fetch('/homework/board/image-upload', {
+              const response = await fetch('/board/image-upload', {
                 method: 'POST',
                 body: formData,
               });
@@ -98,7 +98,7 @@
               console.log('서버에 저장된 파일명 : ', filename);
 
               // 4. addImageBlobHook의 callback 함수를 통해, 디스크에 저장된 이미지를 에디터에 렌더링
-              const imageUrl = `/homework/board/image-print?filename=${filename}`;
+              const imageUrl = `/board/image-print?filename=${filename}`;
               // 5. Toast UI에게 이 이미지를 본문에 삽입하라는 함수
               callback(imageUrl, 'image alt attribute');
 

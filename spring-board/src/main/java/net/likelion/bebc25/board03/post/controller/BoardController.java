@@ -28,11 +28,15 @@ public class BoardController {
     }
 
     // 게시글 목록 조회하는 컨트롤러
+    // Service가 Controller에게 List<PostDto>를 넘셔주면
+    // Html(View)에서는 직접 볼 수 없기 때문에
+    // Controller가 Model에 담아준다.
     @GetMapping("/list.html")
     public String getBoardList(Model model) {
         // 게시글 목록 조회(데이터)
         List<PostDto> posts = postService.getPosts();
 
+        // key 값을 posts로 해서 html(view)에 넘겨준다
         model.addAttribute("posts", posts);
 
         return "board/list";

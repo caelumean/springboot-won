@@ -21,7 +21,7 @@ import java.util.*;
 
 @Controller
 @Slf4j
-@RequestMapping("/homework/board")
+@RequestMapping("/board")
 public class BoardController {
 
     private final PostService postService;
