@@ -58,7 +58,4 @@ public class MemberDto {
    * 회원 가입 일시
    */
   private LocalDateTime createdAt;
-
-    public Object getId() {
-    }
 }
