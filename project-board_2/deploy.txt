@@ -1,0 +1,22 @@
+# 로컬에서 실행
+scp -i "first-key.pem" build/libs/spring-board-0.0.1-SNAPSHOT.jar ec2-user@54.180.118.107:/home/ec2-user/
+scp -i "first-key.pem" build/libs/recipe-community-0.0.1-SNAPSHOT.jar ec2-user@54.180.118.107:/home/ec2-user/
+
+# EC2에서 실행
+sudo yum update -y
+
+sudo tee /etc/yum.repos.d/adoptium.repo << 'EOF'
+[Adoptium]
+name=Adoptium
+baseurl=https://packages.adoptium.net/artifactory/rpm/amazonlinux/2/x86_64
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.adoptium.net/artifactory/api/gpg/key/public
+EOF
+
+sudo yum install temurin-25-jdk -y
+
+echo 'export JAVA_HOME=/usr/lib/jvm/java-25-temurin-jdk' | sudo tee -a /etc/profile
+source /etc/profile
+
+java -jar spring-board-0.0.1-SNAPSHOT.jar
