@@ -1,6 +1,8 @@
 
 application-secret.properties
-
+# AWS
+*.pem
+docs/aws.sh
 **/*.pem
 /uploads/
 /db/
