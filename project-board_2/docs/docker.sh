@@ -17,13 +17,19 @@ docker run -d --name board-web -p 80:8080 --network my-net eclipse-temurin:25-jr
 # 로컬에서 실행
 docker cp ./build/libs/spring-board-0.0.1-SNAPSHOT.jar board-web:/root/board.jar
 
-# 프로젝트를 도커 이미지로 빌드
-./gradlew bootBuildImage --imageName=caelumean/spring-board:1.0
-
-# 컨테이너 내부의 대화형 쉘 접속
+# 컨테이너 내부의 대화형 쉘 접속 후 java 명령어로 board.jar 실행
 docker exec -it board-web //bin/sh
 cd ~
 java -jar board.jar
+
+# 프로젝트를 도커 이미지로 빌드(Spring Boot가 제공하는 bootBuildImage 기능으로 Docker 이미지를 바로 만들 때 사용한다.)
+./gradlew bootBuildImage --imageName=caelumean/spring-board:1.0
+
+# 스프링 프로젝트 빌드 (코드를 수정한 후 새로운 JAR 파일을 만들 때 사용)
+./gradlew clean bootJar
+
+# 프로젝트를 도커 이미지로 빌드 (Dockerfile을 이용해서 Docker 이미지를 만들 때 사용)
+docker build -t caelumean/spring-board:1.0 .
 
 # spring-board 배포
 # 1. 기존 컨테이너들 중지 및 삭제
