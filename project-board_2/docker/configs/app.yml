@@ -5,7 +5,10 @@ spring:
     # 파일명을 프로퍼티 키로, 파일 내용을 프로퍼티 값으로 자동 매핑하는 설정
     import: "configtree:/run/secrets/"
   datasource:
-    url: jdbc:mysql://board-db:3306/board_db # 도커 내부 브리지 네트워크 가상 DNS 서비스명 사용
-    username: board-app
+    url: jdbc:mysql://board-db:3306/board_db
+    username: board_app
     # configtree에 의해 /run/secrets/db-password 파일 내용이 동적으로 할당되는 프로퍼티 참조
     password: "${db-password}"
+  sql:
+    init:
+      mode: always # 컨테이너 구동 시 DB 초기화 스크립트 실행 설정
