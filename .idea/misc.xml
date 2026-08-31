@@ -7,6 +7,5 @@
     <file type="web" url="file://$PROJECT_DIR$/spring-boot-intellij" />
     <file type="web" url="file://$PROJECT_DIR$/SpringCore" />
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{}]]></component>
   <component name="ProjectRootManager" version="2" project-jdk-name="25" project-jdk-type="JavaSDK" />
 </project>
