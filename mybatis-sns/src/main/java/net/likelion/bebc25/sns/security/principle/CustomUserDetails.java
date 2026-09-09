@@ -22,6 +22,11 @@ public class CustomUserDetails implements UserDetails {
         return  this.member;
     }
 
+    // 회원 id 반환
+    public Long getId() {
+        return this.member.getId();
+    }
+
     // 권한 목록 반환
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

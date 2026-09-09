@@ -30,7 +30,7 @@ import java.util.List;
         description = "내부 서버 오류",
         content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))
 )
-@RestController
+//@RestController
 @RequestMapping("/api/v1/posts")
 public class PostRestControllerSwagger {
 
