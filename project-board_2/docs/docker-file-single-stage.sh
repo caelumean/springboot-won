@@ -85,3 +85,6 @@ spring-board:1.1.0
 
 # 9090 포트 수신 응답 상태 확인
 curl http://localhost:9090/post/list
+
+# docker
+docker compose -f docker/docker-compose.yml up -d --build
