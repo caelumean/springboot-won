@@ -2,6 +2,7 @@ package net.likelion.bebc25.sns.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,6 +37,8 @@ public class SecurityConfig
                 // URL 엔드포인트별 기본 접근 인가 설정
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/posts").permitAll()        // GET 방식에 대해서만
+                        .requestMatchers(HttpMethod.GET,"/api/v1/posts/**").permitAll()     // GET 방식에 대해서만
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 );

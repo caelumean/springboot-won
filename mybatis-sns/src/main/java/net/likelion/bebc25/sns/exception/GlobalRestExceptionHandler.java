@@ -64,6 +64,8 @@ public class GlobalRestExceptionHandler {
 
     // 5. 기타 서버 내부 오류 처리 (500 Internal Server Error)
     // 애플리케이션에서 미처 처리하지 못한 모든 런타임 예외를 최종적으로 가로채어 일관된 형태로 응답함
+    // 500 에러같은 경우에는 친절하게 보여줄 필요가 없다.
+    // 에러를 친절하게 보여줄 경우 해커에게 취약점을 제공하는 것이다.
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorResponse> handleGeneralException(Exception ex) {
         log.error(ex.getMessage());
