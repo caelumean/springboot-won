@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.likelion.bebc25.sns.dto.ApiErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -46,29 +47,37 @@ public class GlobalRestExceptionHandler {
         return ResponseEntity.status(ErrorCode.BUSINESS_RULE_VIOLATION.getHttpStatus()).body(response);
     }
 
-    // 3. 자원을 찾지 못했을 때의 예외 처리 (404 Not Found)
-    // 데이터베이스 조회 시 요청 ID에 해당하는 엔티티 데이터가 없을 때 발생하는 예외를 처리함
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<ApiErrorResponse> handleNotFoundException(NoSuchElementException ex) {
-        ApiErrorResponse response = ApiErrorResponse.of(ErrorCode.RESOURCE_NOT_FOUND, ex.getMessage());
-        return ResponseEntity.status(ErrorCode.RESOURCE_NOT_FOUND.getHttpStatus()).body(response);
-    }
-
-    // 4. 비즈니스 권한 및 상태 오류 예외 처리 (403 Forbidden)
-    // 타인의 게시글을 수정/삭제하려 하거나 권한이 없는 자원에 접근할 때 발생하는 예외를 처리함
-    @ExceptionHandler(IllegalStateException.class)
-    public ResponseEntity<ApiErrorResponse> handleForbiddenException(IllegalStateException ex) {
+    // 3. 권한이 없는 리소스 접근시 호출됨(401 Forbidden 응답)
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<ApiErrorResponse> handleAuthorizationDeniedException(AuthorizationDeniedException ex) {
         ApiErrorResponse response = ApiErrorResponse.of(ErrorCode.FORBIDDEN_OPERATION, ex.getMessage());
         return ResponseEntity.status(ErrorCode.FORBIDDEN_OPERATION.getHttpStatus()).body(response);
     }
 
-    // 5. 기타 서버 내부 오류 처리 (500 Internal Server Error)
+    // 4. 자원을 찾지 못했을 때의 예외 처리 (404 Not Found)
+    // 데이터베이스 조회 시 요청 ID에 해당하는 엔티티 데이터가 없을 때 발생하는 예외를 처리함
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ApiErrorResponse> handleNoSuchElementException(NoSuchElementException ex) {
+        ApiErrorResponse response = ApiErrorResponse.of(ErrorCode.RESOURCE_NOT_FOUND, ex.getMessage());
+        return ResponseEntity.status(ErrorCode.RESOURCE_NOT_FOUND.getHttpStatus()).body(response);
+    }
+
+    // 5. 비즈니스 권한 및 상태 오류 예외 처리 (403 Forbidden)
+    // 타인의 게시글을 수정/삭제하려 하거나 권한이 없는 자원에 접근할 때 발생하는 예외를 처리함
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ApiErrorResponse> handleIllegalStateException(IllegalStateException ex) {
+        ApiErrorResponse response = ApiErrorResponse.of(ErrorCode.FORBIDDEN_OPERATION, ex.getMessage());
+        return ResponseEntity.status(ErrorCode.FORBIDDEN_OPERATION.getHttpStatus()).body(response);
+    }
+
+    // 6. 기타 서버 내부 오류 처리 (500 Internal Server Error)
     // 애플리케이션에서 미처 처리하지 못한 모든 런타임 예외를 최종적으로 가로채어 일관된 형태로 응답함
     // 500 에러같은 경우에는 친절하게 보여줄 필요가 없다.
     // 에러를 친절하게 보여줄 경우 해커에게 취약점을 제공하는 것이다.
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorResponse> handleGeneralException(Exception ex) {
-        log.error(ex.getMessage());
+        log.error("Exception 발생", ex);
+//        log.error(ex.getMessage());
         ApiErrorResponse response = ApiErrorResponse.of(ErrorCode.INTERNAL_SERVER_ERROR);
         return ResponseEntity.status(ErrorCode.INTERNAL_SERVER_ERROR.getHttpStatus()).body(response);
     }

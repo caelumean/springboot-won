@@ -10,4 +10,7 @@ public interface MemberMapper {
     // Param XML 파일에서 사용할 변수 이름
     Member findByEmail(@Param("email") String email);
 
+    // 회원 id로 정보 조회
+    Member findById(@Param("id") Long id);
+
 }

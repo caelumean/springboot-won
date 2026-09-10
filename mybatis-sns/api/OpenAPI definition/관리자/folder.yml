@@ -1,7 +1,7 @@
 info:
-  name: 회원
+  name: 관리자
   type: folder
-  seq: 2
+  seq: 3
 
 request:
   auth: inherit

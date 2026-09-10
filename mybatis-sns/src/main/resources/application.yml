@@ -51,3 +51,9 @@ logging:
 
     # 더 세부적인 필터 체인 통과 흐름을 보려면 TRACE 지정 가능
     # org.springframework.security.web.FilterChainProxy: TRACE
+
+jwt:
+  # Base64로 인코딩된 최소 256비트(32바이트) 이상의 보안 비밀키
+  secret: dGhpc2lzbXlzZWNyZXRrZXlmb3Jqd3R0b2tlbnNpZ25hdHVyZXZhbGlkYXRpb24xMjM0NTY3ODkwIQ==
+  access-token-expiration: 3600000      # 1시간 (밀리초 단위)
+  refresh-token-expiration: 604800000   # 7일 (밀리초 단위)

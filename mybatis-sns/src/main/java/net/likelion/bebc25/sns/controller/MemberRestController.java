@@ -2,7 +2,7 @@ package net.likelion.bebc25.sns.controller;
 
 import net.likelion.bebc25.sns.domain.Member;
 import net.likelion.bebc25.sns.dto.MemberProfileResponse;
-import net.likelion.bebc25.sns.security.principle.CustomUserDetails;
+import net.likelion.bebc25.sns.security.principal.CustomUserDetails;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package net.likelion.bebc25.sns.security.principle;
+package net.likelion.bebc25.sns.security.principal;
 
 import net.likelion.bebc25.sns.domain.Member;
 import org.jspecify.annotations.Nullable;
