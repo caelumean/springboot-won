@@ -19,3 +19,11 @@ use jpa_db;
 
 ALTER TABLE member_detail
 RENAME COLUMN id TO member_id;
+
+DROP TABLE IF EXISTS bookmark;
+
+SELECT CONSTRAINT_NAME
+FROM information_schema.TABLE_CONSTRAINTS
+WHERE TABLE_SCHEMA = 'jpa_db'
+  AND TABLE_NAME = 'bookmark'
+  AND CONSTRAINT_TYPE = 'FOREIGN KEY';
